@@ -1,5 +1,5 @@
 #Overview
-ClientLineManager is a professional web application built using AngularJS, ASP.NET Web API, and MySQL Server to manage devices, clients, and phone number reservations.
+Cline is a professional web application built using AngularJS, ASP.NET Web API, and MySQL Server to manage devices, clients, and phone number reservations.
 This platform offers a comprehensive solution to efficiently handle device and client management, as well as phone number reservations.
 
 #Features
