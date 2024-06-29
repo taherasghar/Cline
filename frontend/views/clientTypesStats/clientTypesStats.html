@@ -1,0 +1,41 @@
+<nav-bar></nav-bar>
+<div ng-init="fetchAllClientTypesReport()">
+  <div class="container my-5">
+    <page-header page-title="Client Types Distribution"></page-header>
+
+    <div class="d-flex justify-content-start my-3">
+      <div class="row g-3 align-items-center col-12">
+        <!-- Filter by Type -->
+        <div class="col-md-3">
+          <client-type-selector model="selectedType"></client-type-selector>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-container shadow-lg p-3 mb-5 bg-white rounded">
+      <div class="table-responsive">
+        <table
+          class="table table-hover table-bordered table-striped custom-table"
+          id="clientDataGrid"
+        >
+          <thead class="thead-light">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              ng-repeat="clientTypes in clientTypesReport | filter :{ id : selectedType}"
+            >
+              <td>{{clientTypes.id}}</td>
+              <td>{{clientTypes.name}}</td>
+              <td>{{clientTypes.count }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

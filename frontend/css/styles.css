@@ -1,0 +1,268 @@
+/* Reset some basic elements to ensure compatibility */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.wrapper {
+  flex: 1;
+}
+
+footer-component {
+  background-color: #343a40;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+/* Additional footer styling */
+footer-component .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer-component .container a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+footer-component .container a:hover {
+  color: #ddd;
+}
+
+/* custom.css */
+.custom-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  /* Adjust spacing between rows */
+}
+
+.custom-table th,
+.custom-table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.custom-table th {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #bcbce7;
+  /* Hover background color */
+}
+
+.custom-table .btn {
+  min-width: 40px;
+  /* Adjust button minimum width */
+}
+
+.custom-table .btn svg {
+  margin-right: 5px;
+  /* Spacing between icon and text */
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 20px 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.nav-links li {
+  list-style: none;
+  margin: 0 12px;
+  position: relative;
+  /* Added to make dropdown position relative */
+}
+
+.nav-links li a, .nav-links li button {
+  position: relative;
+  color: #333;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 6px 0;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-links li a:before, .nav-links li button:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: #6183df;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+}
+
+.nav-links li a:hover:before, .nav-links li button:hover:before {
+  width: 100%;
+}
+
+.nav-links li.forward a:before, .nav-links li.forward button:before {
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease;
+}
+
+.nav-links li.forward a:hover:before, .nav-links li.forward button:hover:before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav-links li.active a, .nav-links li.active button {
+  color: #6183df;
+}
+
+.nav-links li.active a:before, .nav-links li.active button:before {
+  width: 100%;
+  background: #6183df;
+}
+
+/* Dropdown menu */
+.nav-links .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+  z-index: 1000;
+}
+
+.nav-links .dropdown:hover .dropdown-menu,
+.nav-links .dropdown:focus-within .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+  border-radius: 8px;
+}
+
+/* Add this new rule */
+.nav-links .ml-auto {
+  margin-left: auto;
+}
+
+/* Home page css */
+.container {
+  background: linear-gradient(135deg, rgba(223, 237, 250, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+  padding: 20px;
+}
+
+h1 {
+  font-size: 36px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  text-align: center;
+}
+
+.tab-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.tab-item {
+  width: 300px;
+  height: 250px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.tab-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.tab-item span {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.tab-description {
+  opacity: 0;
+  font-size: 14px;
+  margin-top: 5px;
+  transition: opacity 0.3s ease;
+}
+
+.tab-item:hover .tab-description {
+  opacity: 1;
+}
+
+.nav-links .greeting {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  color: #1c8ad3;
+  margin-right: 20px;
+}
+
+.nav-links .ml-auto {
+  margin-left: auto;
+}
+
+.snackbar {
+  position: fixed;
+  bottom: 20px;
+  left: -100%;
+  min-width: 300px;
+  padding: 16px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 8px;
+  background-color: #323232;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-left: 6px solid #6a72e0;
+  opacity: 0;
+  transition: left 0.5s ease, opacity 0.5s ease;
+  z-index: 9999;
+}
+
+.snackbar.show {
+  left: 20px;
+  opacity: 1;
+}

@@ -1,0 +1,70 @@
+<div
+  class="modal fade"
+  id="addModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="addModalLabel"
+  aria-hidden="true"
+  ng-init="$parent.fetchAllDevices()"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addModalLabel">
+          Add New Phone Number
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form id="addEntryForm">
+          <div ng-show="errorMessage" class="alert alert-danger">
+            {{errorMessage}}
+          </div>
+          <div class="mb-3">
+            <label for="newNumberInput" class="form-label">Number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="newNumberInput"
+              autocomplete="off"
+              ng-model="$parent.newPhoneNumber.number"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="newDeviceInput" class="form-label">Device</label>
+            <device-selector
+              devices="devices"
+              model="$parent.newPhoneNumber.deviceId"
+            >
+            </device-selector>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-info"
+              ng-click="$parent.handleAddNewPhoneNumber()"
+              ng-disabled="!$parent.newPhoneNumber.number || !$parent.newPhoneNumber.deviceId"
+            >
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<!-- Add Client Modal -->
+<div
+  class="modal fade"
+  id="addModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="addModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addModalLabel">Add New Client</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form id="addEntryForm">
+          <div ng-show="errorMessage" class="alert alert-danger">
+            {{errorMessage}}
+          </div>
+          <div class="mb-3">
+            <label for="newNameInput" class="form-label">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="newNameInput"
+              autocomplete="off"
+              ng-model="newClient.name"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="newTypeInput" class="form-label">Type</label>
+
+            <client-type-selector
+              required
+              model="newClient.type"
+              
+            ></client-type-selector>
+          </div>
+          <div class="mb-3" ng-show="newClient.type == 1">
+            <label for="newBirthDateInput" class="form-label">Birth Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="newBirthDateInput"
+              ng-model="newClient.birthDate"
+              required
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-info"
+              ng-click="handleAddNewClient()"
+              ng-disabled="!newClient.name || (!newClient.birthDate && newClient.type == 1 ) || !newClient.type"
+            >
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

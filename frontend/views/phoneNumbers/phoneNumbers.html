@@ -1,0 +1,99 @@
+<nav-bar></nav-bar>
+<div ng-init="fetchAllPhoneNumbers()">
+  <div class="container my-5">
+    <page-header page-title="Phone Numbers"></page-header>
+
+    <div class="d-flex justify-content-start my-3">
+      <div class="row g-3 align-items-center col-12">
+        <!-- Filter by Number -->
+        <div class="d-flex col-5 rounded-pill">
+          <div class="form-outline" data-mdb-input-init>
+            <input
+              type="search"
+              id="searchInput"
+              ng-model="searchInput"
+              placeholder="Search for a number..."
+              ng-keypress="handleEnterKeyPress($event)"
+              class="form-control rounded-pill"
+              style="background-color: rgb(195, 206, 223)"
+              autocomplete="off"
+            />
+            <label class="form-label" for="form1">Search</label>
+          </div>
+          <button
+            class="btn btn-primary ms-2 rounded-pill d-flex align-items-center"
+            ng-click="handleSearchResults()"
+          >
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+        <!-- Filter by Device -->
+        <div class="col-md-3">
+          <device-selector
+            model="selectedDevice"
+            filtered-phone-numbers="filteredPhoneNumbers"
+          >
+          </device-selector>
+        </div>
+        <div class="col-4 d-flex justify-content-end">
+          <button
+            id="addBtn"
+            class="btn btn-outline-info d-flex align-items-center rounded-pill"
+            data-bs-toggle="modal"
+            data-bs-target="#addModal"
+          >
+            + New Phone Number
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone Numbers Data Table -->
+    <div class="table-container shadow-lg p-3 mb-5 bg-white rounded">
+      <div class="table-responsive">
+        <table
+          class="table table-hover table-bordered table-striped custom-table"
+          id="clientDataGrid"
+        >
+          <thead class="thead-light">
+            <tr>
+              <th>ID</th>
+              <th>Number</th>
+              <th>Device</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="phoneNumber in filteredPhoneNumbers">
+              <td>{{ phoneNumber.id }}</td>
+              <td>{{ phoneNumber.number }}</td>
+              <td>{{ getDeviceName(phoneNumber.deviceId) }}</td>
+              <td>
+                <div aria-label="PhoneNumber Actions" class="">
+                  <button
+                    class="btn btn-outline-warning btn-sm rounded-pill"
+                    ng-click="handleEditPhoneNumber(phoneNumber)"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editModal"
+                  >
+                    <i class="bi bi-pencil"></i> &nbsp; Edit
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Modal Template -->
+<div
+  ng-include="'views/phoneNumbers/phoneNumbers-partials/addModal.html'"
+></div>
+
+<!-- Edit Modal Template -->
+<div
+  ng-include="'views/phoneNumbers/phoneNumbers-partials/editModal.html'"
+></div>

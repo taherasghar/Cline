@@ -1,0 +1,74 @@
+<div ng-show="isAuthenticated" ng-controller="NavController">
+  <ul class="nav-links d-flex align-items-center">
+    <li ng-class="{active: isActive('/')}"><a href="#/">Home</a></li>
+    <li ng-class="{active: isActive('/devices')}" class="forward">
+      <a href="#/devices">Devices</a>
+    </li>
+    <li ng-class="{active: isActive('/clients')}" class="forward">
+      <a href="#/clients">Clients</a>
+    </li>
+    <li
+      ng-class="{active: isActive('/phone-numbers') || isActive('/reservations')}"
+      class="forward dropdown"
+      ng-init="dropdownOpen = false"
+    >
+      <button class="dropdown-toggle" ng-click="dropdownOpen = !dropdownOpen">
+        Phone
+      </button>
+      <ul class="dropdown-menu" ng-show="dropdownOpen">
+        <li>
+          <a
+            href="#/phone-numbers"
+            class="dropdown-item"
+            ng-click="toggleDropdown()"
+            >Numbers</a
+          >
+        </li>
+        <li>
+          <a
+            class="dropdown-item"
+            href="#/reservations"
+            ng-click="toggleDropdown()"
+            >Reservations</a
+          >
+        </li>
+      </ul>
+    </li>
+    <li
+      ng-class="{active: isActive('/reports/client-types-stats')}"
+      class="forward dropdown"
+      ng-init="dropdownOpenReport = false"
+    >
+      <button
+        class="dropdown-toggle"
+        ng-click="dropdownOpenReport = !dropdownOpenReport"
+      >
+        Reports
+      </button>
+      <ul class="dropdown-menu" ng-show="dropdownOpenReport">
+        <li>
+          <a
+            href="#/reports/client-types-stats"
+            class="dropdown-item"
+            ng-click="toggleDropdownReport()"
+            >Clients Stats</a
+          >
+        </li>
+        <li>
+          <a
+            href="#/reports/device-stats"
+            class="dropdown-item"
+            ng-click="toggleDropdownReport()"
+            >Device Stats</a
+          >
+        </li>
+      </ul>
+    </li>
+    <li class="ml-auto greeting">
+      Welcome {{user.firstName}} <i class="bi bi-emoji-smile"></i>
+    </li>
+    <li>
+      <div class="btn btn-danger" ng-click="logout()">Logout</div>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,93 @@
+<!-- Reservation Modal -->
+<div
+  class="modal fade"
+  id="reservationModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="reservationModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="reservationModalLabel">
+          Reserve Phone Number
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" ng-init="fetchPhoneNumbersToBeReserved()">
+        <form
+          id="editEntryForm"
+          ng-submit="reservePhoneNumber(selectedClientForReservation, selectedNumberId)"
+        >
+          <div class="mb-3" hidden>
+            <label for="editNameInput" class="form-label">Name</label>
+            <input
+              type="text"
+              ng-model="selectedClientForReservation.name"
+              class="form-control"
+              id="editNameInput"
+              autocomplete="off"
+              disabled
+            />
+          </div>
+          <div class="mb-3">
+            <label for="filterByNumber" class="form-label">Phone Number</label>
+            <select
+              class="form-select"
+              id="filterByNumber"
+              ng-model="selectedNumberId"
+            >
+              <option value="" disabled>Select Number</option>
+              <option
+                ng-repeat="phoneNumber in phoneNumbers"
+                ng-disabled="phoneNumber.isReserved"
+                value="{{phoneNumber.id}}"
+              >
+                {{phoneNumber.number}}
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-3" hidden> 
+            <label for="bedInput" class="form-label">BED</label>
+            <input
+              type="text"
+              class="form-control"
+              id="bedInput"
+              ng-model="currentTime"
+              disabled
+            />
+          </div>
+          <div class="mb-3" hidden>
+            <label for="eedInput" class="form-label">EED</label>
+            <input
+              type="text"
+              class="form-control"
+              id="eedInput"
+              ng-model="eed"
+              disabled
+            />
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-success" ng-disabled="!selectedNumberId">Reserve</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

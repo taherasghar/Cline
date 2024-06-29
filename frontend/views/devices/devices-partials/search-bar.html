@@ -1,0 +1,36 @@
+<div class="row my-3">
+  <div class="col-12 d-flex justify-content-between align-items-center">
+    <div class="d-flex col-5 rounded-pill">
+      <div class="form-outline" data-mdb-input-init>
+        <input
+          type="search"
+          id="searchInput"
+          ng-model="$parent.searchInput"
+          ng-keypress="$parent.handleEnterKeyPress($event)"
+          class="form-control rounded-pill"
+          placeholder="Search for a device..."
+          style="background-color: rgb(195, 206, 223)"
+          autocomplete="off"
+        />
+        <label class="form-label" for="form1">Search</label>
+      </div>
+      <button
+        ng-click="$parent.handleSearchResults()"
+        class="btn btn-primary ms-2 rounded-pill d-flex align-items-center"
+      >
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+
+    <div class="col-7 d-flex justify-content-end">
+      <button
+        id="addBtn"
+        class="btn btn-outline-info d-flex align-items-center rounded-pill"
+        data-bs-toggle="modal"
+        data-bs-target="#addModal"
+      >
+        + New Device
+      </button>
+    </div>
+  </div>
+</div>

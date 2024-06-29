@@ -1,0 +1,43 @@
+<div class="table-container shadow-lg p-3 mb-5 bg-white rounded">
+  <div class="table-responsive">
+    <table
+      class="table table-hover table-bordered table-striped custom-table"
+      id="dataGrid"
+    >
+      <thead class="thead-light">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="device in devices">
+          <td>{{device.id}}</td>
+          <td>{{device.name}}</td>
+          <td>
+            <div aria-label="Device Actions" class="">
+              <button
+                class="btn btn-outline-warning btn-sm rounded-pill"
+                ng-click="editDevice(device)"
+                data-bs-toggle="modal"
+                data-bs-target="#editModal"
+              >
+                <i class="bi bi-pencil"></i> &nbsp; Edit
+              </button>
+              <button
+                class="btn btn-outline-danger btn-sm rounded-pill"
+                ng-click="showDeleteConfirmation(device.id)"
+                ng-disabled="device.isAssigned"
+                hidden
+              >
+                <i class="fa-regular fa-trash-can"></i>
+                Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

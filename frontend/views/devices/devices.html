@@ -1,0 +1,11 @@
+<nav-bar></nav-bar>
+<div ng-init="fetchAllDevices()">
+  <div class="container my-5">
+    <page-header page-title="Devices"></page-header>
+
+    <div ng-include="'views/devices/devices-partials/search-bar.html'"></div>
+    <div ng-include="'views/devices/devices-partials/data-table.html'"></div>
+  </div>
+
+  <div ng-include="'views/devices/devices-partials/modals.html'"></div>
+</div>

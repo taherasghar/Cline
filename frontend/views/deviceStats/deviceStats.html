@@ -1,0 +1,60 @@
+<nav-bar></nav-bar>
+<div ng-init="fetchDeviceStatsReport()">
+  <div class="container my-5">
+    <page-header page-title="Devices & Statuses"></page-header>
+    <div class="d-flex justify-content-start my-3">
+      <div class="row g-3 align-items-center col-12">
+        <!-- Filter by Device -->
+        <div class="col-6">
+          <select class="form-select" ng-model="selectedDevice">
+            <option value="">All Devices</option>
+            <option
+              ng-repeat="device in deviceStatsReport"
+              value="{{ device.deviceName }}"
+            >
+              {{ device.deviceName }}
+            </option>
+          </select>
+        </div>
+         <!-- Filter by Status -->
+         <div class="col-6">
+          <select class="form-select" ng-model="selectedStatus">
+            <option value="">All Statuses</option>
+            <option value="1">Reserved</option>
+            <option value="2">UnReserved</option>
+            
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="table-container shadow-lg p-3 mb-5 bg-white rounded">
+      <div class="table-responsive">
+        <table
+          class="table table-hover table-bordered table-striped custom-table"
+          id="clientDataGrid"
+        >
+          <thead class="thead-light">
+            <tr>
+              <th>Device</th>
+              <th>Phone Numbers Status</th>
+              <th># Phone Numbers</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              ng-repeat-start="deviceStat in deviceStatsReport | filter : {deviceName : selectedDevice}"
+            >
+              <td rowspan="2">{{deviceStat.deviceName}}</td>
+              <td ng-hide="selectedStatus == 2">Reserved</td>
+              <td ng-hide="selectedStatus == 2">{{deviceStat.numberOfReservedPhoneNumbers}}</td>
+            </tr>
+            <tr ng-repeat-end>
+              <td ng-hide="selectedStatus == 1">Unreserved</td>
+              <td ng-hide="selectedStatus == 1">{{deviceStat.numberOfUnReservedPhoneNumbers}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

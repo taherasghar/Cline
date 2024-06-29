@@ -1,0 +1,74 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="">
+          <div ng-show="errorMessage" class="alert alert-danger">
+            {{errorMessage}}
+          </div>
+          <h2
+            class="card-title text-center mb-4"
+            style="
+              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+              color: #333;
+            "
+          >
+            Welcome Back!
+          </h2>
+          <form ng-submit="login()" class="needs-validation" novalidate>
+            <div class="mb-3">
+              <label for="username" class="form-label" style="color: #555"
+                >Username</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                ng-model="credentials.username"
+                required
+              />
+              <div class="invalid-feedback">Please enter your username.</div>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label" style="color: #555"
+                >Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                ng-model="credentials.password"
+                required
+              />
+              <div class="invalid-feedback">Please enter your password.</div>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="rememberMe" />
+              <label
+                class="form-check-label"
+                for="rememberMe"
+                style="color: #555"
+                >Remember Me</label
+              >
+            </div>
+            <div class="text-center">
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg"
+                style="background-color: #007bff; border-color: #007bff"
+              >
+                Login
+              </button>
+            </div>
+          </form>
+          <div class="text-center mt-3">
+            <p style="color: #555">
+              Don't have an account?
+              <a href="#/register" style="color: #007bff">Register now</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
