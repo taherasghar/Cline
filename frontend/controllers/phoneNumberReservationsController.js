@@ -5,17 +5,10 @@ export default function phoneNumberReservationsController(
 ) {
   $scope.reservations = [];
 
-  // Function to format the date
   const formatDate = (dateString) => {
     if (!dateString) return "";
-
-    // Split the date and time parts
     const [datePart, timePart] = dateString.split("T");
-
-    // Remove milliseconds from the time part
     const formattedTime = timePart.split(".")[0];
-
-    // Combine date part and formatted time with ' at '
     return `${datePart} at ${formattedTime}`;
   };
 
@@ -39,6 +32,8 @@ export default function phoneNumberReservationsController(
       }
     );
   };
+  $scope.isLoading = true;
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   $scope.fetchAllReservedPhoneNumbers = () => {
     $http.get(`${API_BASE_URL}/phoneNumbersReservations/getAll`).then(
@@ -57,6 +52,10 @@ export default function phoneNumberReservationsController(
 
         const clients = $scope.reservations.map((r) => r.clientName);
         $scope.uniqueClientNames = [...new Set(clients)];
+        delay(100).then(() => {
+          $scope.isLoading = false;
+          $scope.$apply();
+        });
       },
       (err) => {
         console.error("Error fetching reserved phone numbers:", err);
