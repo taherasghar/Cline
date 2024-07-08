@@ -1,9 +1,15 @@
 export default function reportsController($scope, $http, API_BASE_URL) {
+  $scope.isLoading = true;
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
   $scope.fetchAllClientTypesReport = () => {
     $http.get(`${API_BASE_URL}/reports/getAllClientTypes`).then(
       (res) => {
         $scope.clientTypesReport = res.data;
-        console.log($scope.clientTypesReport);
+        delay(100).then(() => {
+          $scope.isLoading = false;
+          $scope.$apply();
+        });
       },
       (err) => {
         console.error("Error fetching devices:", err);
@@ -25,7 +31,10 @@ export default function reportsController($scope, $http, API_BASE_URL) {
     $http.get(`${API_BASE_URL}/reports/getDeviceStatsReport`).then(
       (res) => {
         $scope.deviceStatsReport = res.data;
-        console.log("Device Stats Report:", res.data);
+        delay(100).then(() => {
+          $scope.isLoading = false;
+          $scope.$apply();
+        });
       },
       (err) => {
         console.error("Error fetching device stats report:", err);
