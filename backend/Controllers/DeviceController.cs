@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -209,5 +209,52 @@ namespace vanrise_backend.Controllers
                 return duplicateCount > 0;
             }
         }
+
+        [HttpGet]
+        [Route("getAssignedPhoneNumbersMap")]
+        public IHttpActionResult GetAssignedPhoneNumbersMap()
+        {
+            var result = new Dictionary<int, List<AssignedPhoneNumber>>();
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand("GetAssignedPhoneNumbers", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                connection.Open();
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    int deviceId = (int)reader["DeviceId"];
+                    int phoneNumberId = (int)reader["PhoneNumberId"];
+                    string phoneNumber = reader["Number"].ToString();
+                    bool isReserved = (bool)reader["IsReserved"];  // Read the IsReserved column
+
+                    if (!result.ContainsKey(deviceId))
+                    {
+                        result[deviceId] = new List<AssignedPhoneNumber>();
+                    }
+
+                    result[deviceId].Add(new AssignedPhoneNumber
+                    {
+                        Id = phoneNumberId,
+                        Number = phoneNumber,
+                        IsReserved = isReserved  // Add the IsReserved property
+                    });
+                }
+            }
+
+            return Ok(result);
+        }
+
+        public class AssignedPhoneNumber
+        {
+            public int Id { get; set; }
+            public string Number { get; set; }
+            public bool IsReserved { get; set; }  // Add IsReserved property
+        }
+
     }
 }
