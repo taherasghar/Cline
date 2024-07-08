@@ -3,11 +3,12 @@ export default function clientController(
   $http,
   $interval,
   API_BASE_URL,
-  authService,
   snackbarService
 ) {
-  console.log(authService.isAuthenticated());
   // Fetch all clients
+  $scope.isLoading = true;
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
   $scope.fetchAllClients = () => {
     $http.get(`${API_BASE_URL}/clients/getAll`).then(
       (res) => {
@@ -19,6 +20,10 @@ export default function clientController(
         });
 
         $scope.filteredClients = $scope.clients;
+        delay(100).then(() => {
+          $scope.isLoading = false;
+          $scope.$apply(); 
+        });
       },
       (err) => {
         console.error("Error fetching clients:", err);
