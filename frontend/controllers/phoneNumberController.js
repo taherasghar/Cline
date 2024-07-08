@@ -2,8 +2,10 @@ export default function phoneNumbersController(
   $scope,
   $http,
   API_BASE_URL,
-  snackbarService
+  snackbarService,
 ) {
+  $scope.isLoading = true;
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   $scope.fetchAllPhoneNumbers = () => {
     $http.get(`${API_BASE_URL}/phoneNumbers/getAll`).then(
       (res) => {
@@ -11,6 +13,10 @@ export default function phoneNumbersController(
         $scope.phoneNumbers = res.data;
         // Initialize filteredPhoneNumbers to show all phone numbers initially
         $scope.filteredPhoneNumbers = res.data;
+        delay(100).then(() => {
+          $scope.isLoading = false;
+          $scope.$apply(); 
+        });
       },
       (err) => {
         console.error("Error fetching phone numbers:", err);
