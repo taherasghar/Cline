@@ -4,14 +4,21 @@ export default function devicesController(
   API_BASE_URL,
   snackbarService
 ) {
+  $scope.isLoading = true;
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
   $scope.fetchAllDevices = () => {
     $http.get(`${API_BASE_URL}/devices/getAll`).then(
       (res) => {
-        $scope.devices = res.data;
+        $scope.devices = res.data.map(device => ({ ...device, showDrillDown: false }));
+        delay(200).then(() => {
+          $scope.isLoading = false;
+          $scope.$apply(); 
+        });
       },
       (err) => {
         console.error("Error fetching devices:", err);
-
+        $scope.isLoading = false;
         if (err.data) {
           console.error("Error data:", err.data);
         }
@@ -24,6 +31,12 @@ export default function devicesController(
       }
     );
   };
+
+  $scope.toggleDrillDown = (device) => {
+    device.showDrillDown = !device.showDrillDown;
+  };
+
+
   $scope.handleSearchResults = () => {
     const searchText = $scope?.searchInput?.toLowerCase()?.toString() || "";
     $http
@@ -177,4 +190,27 @@ export default function devicesController(
       }
     );
   };
+
+  $scope.fetchAssignedPhoneNumbersMap = () => {
+    $http.get(`${API_BASE_URL}/devices/getAssignedPhoneNumbersMap`).then(
+      (res) => {
+        $scope.assignedPhoneNumbersMap = res.data;
+        console.log($scope.assignedPhoneNumbersMap);
+      },
+      (err) => {
+        console.error("Error fetching assigned phone numbers map:", err);
+        if (err.data) {
+          console.error("Error data:", err.data);
+        }
+        if (err.status) {
+          console.error("Error status:", err.status);
+        }
+        if (err.statusText) {
+          console.error("Error status text:", err.statusText);
+        }
+      }
+    );
+  };
+
+  $scope.fetchAssignedPhoneNumbersMap();
 }
