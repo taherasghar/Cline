@@ -13,6 +13,7 @@
           <td>{{device.id}}</td>
           <td ng-click="toggleDrillDown(device)" style="cursor: pointer;">
             {{device.name}}
+            <i class="bi" ng-class="device.showDrillDown ? 'bi-chevron-down' : 'bi-chevron-right'" aria-hidden="true"></i>
           </td>
           <td>
             <div aria-label="Device Actions" class="">
@@ -28,13 +29,14 @@
         </tr>
         <tr ng-repeat-end ng-if="device.showDrillDown" class="drill-down-row">
           <td colspan="3">
-            <div>
+            <div class="drill-down-content">
+              <h5 class="drill-down-title">Registered Phone Numbers for '{{device.name}}'</h5>
               <table class="table table-sm">
                 <thead>
                   <tr>
                     <th>Phone Number Id</th>
                     <th>Number</th>
-                    <th>Reservation Status</th>  
+                    <th>Reservation Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -44,15 +46,30 @@
                     <td>
                       <span ng-if="obj.isReserved" class="badge bg-success">Reserved</span>
                       <span ng-if="!obj.isReserved" class="badge bg-danger">UnReserved</span>
-                    </td>  
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </td>
         </tr>
-        
       </tbody>
     </table>
   </div>
 </div>
+
+<style>
+  .drill-down-content {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  .drill-down-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #0056b3;
+    text-align: center;
+  }
+</style>
